@@ -1,1 +1,304 @@
-<h1>Github pages test</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DATAWATT | Monitoreo de Consumo Energético</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ===================== TOASTS ===================== -->
+<div id="toastContainer" class="toast-container"></div>
+
+<!-- ===================== SIDEBAR ===================== -->
+<button id="navToggle" class="nav-toggle" aria-label="Abrir menú">
+  <span></span><span></span><span></span>
+</button>
+
+<aside class="sidebar" id="sidebar">
+  <div class="brand">
+    <div class="brand-mark">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="currentColor"/></svg>
+    </div>
+    <div>
+      <p class="brand-name">DATAWATT</p>
+      <p class="brand-sub">UTMACH · Grupo 5</p>
+    </div>
+  </div>
+
+  <nav class="nav" id="navMenu">
+    <button class="nav-item active" data-section="dashboard">
+      <svg viewBox="0 0 24 24"><path d="M3 13h4v8H3zM10 3h4v18h-4zM17 8h4v13h-4z"/></svg>
+      Panel general
+    </button>
+    <button class="nav-item" data-section="registrar">
+      <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+      Registrar consumo
+    </button>
+    <button class="nav-item" data-section="actualizar">
+      <svg viewBox="0 0 24 24"><path d="M4 20l4-1 10-10-3-3L5 16l-1 4Z"/></svg>
+      Actualizar equipo
+    </button>
+    <button class="nav-item" data-section="historial">
+      <svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 15l4-5 3 3 5-7"/></svg>
+      Historial
+    </button>
+    <button class="nav-item" data-section="estadistica">
+      <svg viewBox="0 0 24 24"><path d="M4 19h16M8 19V9m4 10V5m4 14v-7"/></svg>
+      Estadística general
+    </button>
+    <button class="nav-item" data-section="procedimiento">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16v4H4zM4 12h10v8H4zM17 12h3v8h-3z"/></svg>
+      Procedimiento
+    </button>
+    <button class="nav-item" data-section="clasificacion">
+      <svg viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5-10-5ZM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      Clasificación
+    </button>
+    <button class="nav-item" data-section="ranking">
+      <svg viewBox="0 0 24 24"><path d="M8 21V10M14 21V3M20 21v-7M2 21h20"/></svg>
+      Ranking
+    </button>
+    <button class="nav-item" data-section="recomendaciones">
+      <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2ZM9 21h6"/></svg>
+      Recomendaciones
+    </button>
+    <button class="nav-item" data-section="alertas">
+      <svg viewBox="0 0 24 24"><path d="M12 3 2 20h20L12 3ZM12 10v4M12 17h.01"/></svg>
+      Alertas
+    </button>
+    <button class="nav-item" data-section="simulacion">
+      <svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>
+      Simulación
+    </button>
+    <button class="nav-item" data-section="costo">
+      <svg viewBox="0 0 24 24"><path d="M12 2v20M17 6.5c0-1.9-2.2-3-5-3s-5 1.3-5 3 2.2 3 5 3 5 1.1 5 3-2.2 3-5 3-5-1.1-5-3"/></svg>
+      Costo económico
+    </button>
+    <button class="nav-item" data-section="exportar">
+      <svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>
+      Exportar reporte
+    </button>
+    <button class="nav-item" data-section="configuracion">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg>
+      Configuración
+    </button>
+  </nav>
+
+  <div class="sidebar-footer">
+    <span id="statusDot" class="status-dot"></span>
+    <span id="statusText">Sin datos registrados</span>
+  </div>
+</aside>
+
+<!-- ===================== MAIN ===================== -->
+<main class="main">
+
+  <header class="topbar">
+    <div>
+      <h1 id="pageTitle">Panel general</h1>
+      <p id="pageSubtitle" class="muted">Monitoreo de consumo energético mediante algoritmos estadísticos</p>
+    </div>
+    <div class="topbar-chip">
+      <span class="muted">Tarifa</span>
+      <strong id="tarifaChip">$0.10 / kWh</strong>
+    </div>
+  </header>
+
+  <!-- ---------- DASHBOARD ---------- -->
+  <section class="section active" id="sec-dashboard">
+    <div class="cards-grid">
+      <div class="card stat-card">
+        <p class="stat-label">Consumo total</p>
+        <p class="stat-value mono" id="cardTotal">0.00 <span>kWh</span></p>
+      </div>
+      <div class="card stat-card">
+        <p class="stat-label">Promedio por equipo</p>
+        <p class="stat-value mono" id="cardPromedio">0.00 <span>kWh</span></p>
+      </div>
+      <div class="card stat-card">
+        <p class="stat-label">Costo estimado</p>
+        <p class="stat-value mono" id="cardCosto">$0.00</p>
+      </div>
+      <div class="card stat-card alert-card">
+        <p class="stat-label">Alertas activas</p>
+        <p class="stat-value mono" id="cardAlertas">0</p>
+      </div>
+    </div>
+
+    <div class="dash-row">
+      <div class="card gauge-card">
+        <p class="card-title">Consumo total vs. capacidad estimada</p>
+        <canvas id="gaugeCanvas" width="260" height="180"></canvas>
+        <p class="muted" id="gaugeLabel">Registra datos para ver el medidor</p>
+      </div>
+
+      <div class="card">
+        <p class="card-title">Distribución por equipo/área</p>
+        <div class="table-wrap">
+          <table id="dashTable">
+            <thead><tr><th>Equipo</th><th>Estado</th><th>Total (kWh)</th><th>%</th><th>Nivel</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- 1. REGISTRAR ---------- -->
+  <section class="section" id="sec-registrar">
+    <div class="card">
+      <p class="card-title">Registro de consumos por equipo/área (periodos: 1–<span id="numPeriodosLabel1"></span>)</p>
+      <p class="muted">Ingresa el estado y el consumo de cada periodo. Si el equipo está apagado, se registra 0 kWh automáticamente.</p>
+      <form id="formRegistrar"></form>
+      <button class="btn btn-primary" id="btnRegistrarSubmit">Guardar y calcular</button>
+    </div>
+  </section>
+
+  <!-- ---------- 2. ACTUALIZAR ---------- -->
+  <section class="section" id="sec-actualizar">
+    <div class="card">
+      <p class="card-title">Actualizar el consumo de un equipo</p>
+      <label class="field-label">Seleccione el equipo</label>
+      <select id="selectEquipoActualizar" class="input"></select>
+      <div id="formActualizarWrap"></div>
+      <button class="btn btn-primary" id="btnActualizarSubmit">Actualizar equipo</button>
+    </div>
+  </section>
+
+  <!-- ---------- 3. HISTORIAL ---------- -->
+  <section class="section" id="sec-historial">
+    <div class="card">
+      <p class="card-title">Historial de consumos por periodo</p>
+      <div id="historialWrap"></div>
+    </div>
+  </section>
+
+  <!-- ---------- 4. ESTADISTICA ---------- -->
+  <section class="section" id="sec-estadistica">
+    <div class="card">
+      <p class="card-title">Estadística descriptiva general</p>
+      <div id="estadisticaWrap" class="kv-list"></div>
+    </div>
+  </section>
+
+  <!-- ---------- 5. PROCEDIMIENTO ---------- -->
+  <section class="section" id="sec-procedimiento">
+    <div class="card">
+      <p class="card-title">Procedimiento matemático</p>
+      <div id="procedimientoWrap" class="formula-list"></div>
+    </div>
+  </section>
+
+  <!-- ---------- 6. CLASIFICACION ---------- -->
+  <section class="section" id="sec-clasificacion">
+    <div class="card">
+      <p class="card-title">Clasificación automática y tendencia</p>
+      <div class="table-wrap">
+        <table id="clasifTable">
+          <thead><tr><th>Equipo</th><th>Nivel</th><th>Tendencia</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- 7. RANKING ---------- -->
+  <section class="section" id="sec-ranking">
+    <div class="card">
+      <p class="card-title">Ranking de equipos por consumo</p>
+      <canvas id="rankingCanvas" height="220"></canvas>
+      <div class="table-wrap">
+        <table id="rankingTable">
+          <thead><tr><th>#</th><th>Equipo</th><th>Total (kWh)</th><th>%</th><th>Costo</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- 8. RECOMENDACIONES ---------- -->
+  <section class="section" id="sec-recomendaciones">
+    <div class="card">
+      <p class="card-title">Recomendaciones del sistema</p>
+      <ul id="recomendacionesList" class="rec-list"></ul>
+    </div>
+  </section>
+
+  <!-- ---------- 9. ALERTAS ---------- -->
+  <section class="section" id="sec-alertas">
+    <div class="card">
+      <p class="card-title">Alertas generadas</p>
+      <p class="muted">Regla: nivel Alto/Crítico Y equipo Encendido</p>
+      <ul id="alertasList" class="alert-list"></ul>
+    </div>
+  </section>
+
+  <!-- ---------- 10. SIMULACION ---------- -->
+  <section class="section" id="sec-simulacion">
+    <div class="card">
+      <p class="card-title">Modo simulación</p>
+      <p class="muted">Genera datos aleatorios de estado y consumo (0–70 kWh) para todos los equipos.</p>
+      <button class="btn btn-primary" id="btnSimular">Generar datos aleatorios</button>
+      <div id="simulacionResultado" class="kv-list"></div>
+    </div>
+  </section>
+
+  <!-- ---------- 11. COSTO ---------- -->
+  <section class="section" id="sec-costo">
+    <div class="card">
+      <p class="card-title">Costo económico estimado</p>
+      <div class="table-wrap">
+        <table id="costoTable">
+          <thead><tr><th>Equipo</th><th>Consumo (kWh)</th><th>Costo ($)</th></tr></thead>
+          <tbody></tbody>
+          <tfoot></tfoot>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- 12. EXPORTAR ---------- -->
+  <section class="section" id="sec-exportar">
+    <div class="card">
+      <p class="card-title">Exportar reporte</p>
+      <label class="field-label">Nombre del archivo</label>
+      <input type="text" id="exportNombre" class="input" placeholder="reporte_energetico">
+      <label class="field-label">Formato</label>
+      <div class="radio-row">
+        <label><input type="radio" name="formatoExport" value="txt" checked> Texto (.txt)</label>
+        <label><input type="radio" name="formatoExport" value="csv"> CSV (.csv)</label>
+      </div>
+      <button class="btn btn-primary" id="btnExportar">Descargar reporte</button>
+    </div>
+  </section>
+
+  <!-- ---------- 13. CONFIGURACION ---------- -->
+  <section class="section" id="sec-configuracion">
+    <div class="card">
+      <p class="card-title">Configuración del sistema</p>
+      <p class="muted">Al guardar cambios se deben registrar los datos nuevamente.</p>
+
+      <label class="field-label">Número de equipos/áreas (1–15)</label>
+      <input type="number" id="cfgNumEquipos" class="input" min="1" max="15">
+      <div id="cfgNombresEquipos" class="field-group"></div>
+
+      <label class="field-label">Número de periodos de medición (1–31)</label>
+      <input type="number" id="cfgNumPeriodos" class="input" min="1" max="31">
+      <div id="cfgNombresPeriodos" class="field-group"></div>
+
+      <label class="field-label">Tarifa eléctrica ($/kWh)</label>
+      <input type="number" id="cfgTarifa" class="input" min="0" step="0.01">
+
+      <button class="btn btn-primary" id="btnGuardarConfig">Guardar configuración</button>
+    </div>
+  </section>
+
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
